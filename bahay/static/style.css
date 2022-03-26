@@ -1,0 +1,94 @@
+
+
+
+.btn-bahay { 
+    color: #ffffff; 
+    background-color: #0CB454; 
+    border-color: #009E44; 
+  } 
+   
+  .btn-bahay:hover, 
+  .btn-bahay:focus, 
+  .btn-bahay:active, 
+  .btn-bahay.active, 
+  .open .dropdown-toggle.btn-bahay { 
+    color: #ffffff; 
+    background-color: #097839; 
+    border-color: #009E44; 
+  } 
+   
+  .btn-bahay:active, 
+  .btn-bahay.active, 
+  .open .dropdown-toggle.btn-bahay { 
+    background-image: none; 
+  } 
+   
+  .btn-bahay.disabled, 
+  .btn-bahay[disabled], 
+  fieldset[disabled] .btn-bahay, 
+  .btn-bahay.disabled:hover, 
+  .btn-bahay[disabled]:hover, 
+  fieldset[disabled] .btn-bahay:hover, 
+  .btn-bahay.disabled:focus, 
+  .btn-bahay[disabled]:focus, 
+  fieldset[disabled] .btn-bahay:focus, 
+  .btn-bahay.disabled:active, 
+  .btn-bahay[disabled]:active, 
+  fieldset[disabled] .btn-bahay:active, 
+  .btn-bahay.disabled.active, 
+  .btn-bahay[disabled].active, 
+  fieldset[disabled] .btn-bahay.active { 
+    background-color: #0CB454; 
+    border-color: #009E44; 
+  } 
+   
+  .btn-bahay .badge { 
+    color: #0CB454; 
+    background-color: #ffffff; 
+  }
+
+  .btn-bahay-outline { 
+    color: #0CB454; 
+    background-color: transparent; 
+    border-color: #009E44; 
+  } 
+   
+  .btn-bahay-outline:hover, 
+  .btn-bahay-outline:focus, 
+  .btn-bahay-outline:active, 
+  .btn-bahay-outline.active, 
+  .open .dropdown-toggle.btn-bahay-outline { 
+    color: #ffffff; 
+    background-color: #097839; 
+    border-color: #009E44; 
+  } 
+   
+  .btn-bahay-outline:active, 
+  .btn-bahay-outline.active, 
+  .open .dropdown-toggle.btn-bahay-outline { 
+    background-image: none; 
+  } 
+   
+  .btn-bahay-outline.disabled, 
+  .btn-bahay-outline[disabled], 
+  fieldset[disabled] .btn-bahay-outline, 
+  .btn-bahay-outline.disabled:hover, 
+  .btn-bahay-outline[disabled]:hover, 
+  fieldset[disabled] .btn-bahay-outline:hover, 
+  .btn-bahay-outline.disabled:focus, 
+  .btn-bahay-outline[disabled]:focus, 
+  fieldset[disabled] .btn-bahay-outline:focus, 
+  .btn-bahay-outline.disabled:active, 
+  .btn-bahay-outline[disabled]:active, 
+  fieldset[disabled] .btn-bahay-outline:active, 
+  .btn-bahay-outline.disabled.active, 
+  .btn-bahay-outline[disabled].active, 
+  fieldset[disabled] .btn-bahay-outline.active { 
+    background-color: #0CB454; 
+    border-color: #009E44; 
+  } 
+   
+  .btn-bahay-outline .badge { 
+    color: #0CB454; 
+    background-color: #ffffff; 
+  }

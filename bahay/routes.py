@@ -1,8 +1,8 @@
 from bahay import app
+from flask import render_template
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def home():
+    """ Render Home page. """
+    return render_template("home.html")
 
-
-    
