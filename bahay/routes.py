@@ -1,8 +1,8 @@
 from bahay import app, db, bcrypt
+from flask_login import login_user, current_user, logout_user
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from bahay.models import User, House, Room, Task, History
 from bahay.forms import AddRoomForm, AddTaskForm, RegistrationForm, LoginForm, JoinForm, CreateForm
-from flask_login import login_user, current_user, logout_user
 from datetime import datetime, timedelta
 import string
 import random
@@ -122,6 +122,7 @@ def get_task():
 def add_task():
     """ Render Add a Task form. """
     form = AddTaskForm()
+    form.room.choices = [(r.id, r.name) for r in Room.query.filter_by(house_id=current_user.house.id)]
     if form.validate_on_submit():
         room = Room.query.get(request.args['id'])
         due_date = datetime.utcnow() + timedelta(days=form.frequency.data)

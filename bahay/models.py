@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         """ Prints string of User. """
-        return f"User('{self.id}', '{self.name}')"
+        return f"User('{self.id}', '{self.first_name}')"
 
 class House(db.Model):
     """ Represents a household. """

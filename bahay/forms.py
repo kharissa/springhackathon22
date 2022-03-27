@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from bahay.models import User
+from bahay.models import User, Room
+from flask_login import current_user
 
 class RegistrationForm(FlaskForm):
     """ Register new user form. """
@@ -45,4 +46,5 @@ class AddTaskForm(FlaskForm):
     name = StringField("Task Name", validators=[DataRequired()], render_kw={"placeholder": "Sweep floor"})
     frequency = IntegerField("Frequency (Days)", validators=[DataRequired()])
     points = IntegerField("Point Value", validators=[DataRequired()])
+    room = SelectField(u'Select Room', coerce=int)
     submit = SubmitField("Add Task")

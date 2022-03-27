@@ -23,6 +23,21 @@
                                 {% endif %}
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="form-group dropdown">
+                                {{ form.room.label(class="form-control-label drop-down") }}
+                                {% if form.room.errors %}
+                                {{ form.room(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.room.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.room(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                     <div class="row my-2">
                         <div class="col">

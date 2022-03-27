@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col">
                         {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('profile') }}">
+                        <a href="{{ url_for('house_tasks') }}">
                             <button type="button" class="btn btn-bahay ml-4">View House Tasks</button>
                         </a>
                         {% else %}
