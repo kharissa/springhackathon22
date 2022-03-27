@@ -20,12 +20,12 @@
 <body>
     <!-- NavBar HTML start -->
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
-        messages %} {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissible fade show alert-fixed" role="alert">
-            {{ message }}
-            <a href="#" class="alert-link" data-dismiss="alert" aria-label="Close">Close Notification</a>
-        </div>
-        {% endfor %} {% endif %} {% endwith %}
+    messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show alert-fixed" role="alert">
+        {{ message }}
+        <a href="#" class="alert-link" data-dismiss="alert" aria-label="Close">Close Notification</a>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
     <header class="site-header">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-bahay">
             <div class="container-fluid">
@@ -43,18 +43,33 @@
                         <li class="nav-item align-self-center px-2">
                             {{ current_user.points}} points
                         </li>
+                        <a href="{{ url_for('profile') }}">
+                            <li class="nav-item align-self-center px-2">
+                                My House
+                            </li>
+                        </a>
+                        <a href="{{ url_for('house_tasks') }}">
+                            <li class="nav-item align-self-center px-2">
+                                House Tasks
+                            </li>
+                        </a>
+                        <a href="{{ url_for('history') }}">
+                            <li class="nav-item align-self-center px-2">
+                                History
+                            </li>
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for('profile') }}">
+                            <li class="nav-item align-self-center px-2">
+                                My House
+                            </li>
+                        </a>
                         {% endif %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Account
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                         
-                              <a class="dropdown-item" href="{{ url_for('profile') }}">My Home</a>
-                              <a class="dropdown-item" href="{{ url_for('history') }}">History</a>
-                              <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
-                            </div>
-                          </li>
+                        <a href="{{ url_for('logout') }}">
+                            <li class="nav-item align-self-center px-2">
+                                Logout
+                            </li>
+                        </a>
                         {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('login') }}">
@@ -71,7 +86,7 @@
                             </a>
                         </li>
                         {% endif %}
-                        
+
                     </ul>
                 </div>
             </div>

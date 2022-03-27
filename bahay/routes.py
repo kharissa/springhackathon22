@@ -15,6 +15,12 @@ def profile():
     """ Render Profile page. """
     return render_template("account/profile.html")
 
+@app.route("/house-tasks")
+def house_tasks():
+    """ Render House Tasks page. """
+    return render_template("house/tasks.html")
+
+
 @app.route("/history")
 def history():
     """ Render History page. """
@@ -69,7 +75,7 @@ def create_house():
         current_user.house = house
         db.session.commit()
         flash("Great! Next step is to share your join code with your roommates.", "success")
-        return redirect(url_for("profile"))
+        return redirect(url_for("house_tasks"))
     return render_template("house/create.html", title="Create a House", form=form)
 
 @app.route("/house/join", methods=["GET", "POST"])
@@ -94,7 +100,7 @@ def add_room():
         room = Room(name=form.name.data, house=current_user.house)
         db.session.add(room)
         db.session.commit()
-        return redirect(url_for("profile"))
+        return redirect(url_for("house_tasks"))
     return render_template("house/add-room.html", title="Add a Room", form=form)
 
 @app.route("/task", methods=["GET", "POST"])
@@ -107,7 +113,7 @@ def add_task():
         task = Task(name=form.name.data, frequency=form.frequency.data, points=form.points.data, room=room, room_id=room.id, due_date=due_date)
         db.session.add(task)
         db.session.commit()
-        return redirect(url_for("profile"))
+        return redirect(url_for("house_tasks"))
     return render_template("house/add-task.html", title="Add a Task", form=form)
 
 @app.route("/task/done", methods=["GET", "POST"])

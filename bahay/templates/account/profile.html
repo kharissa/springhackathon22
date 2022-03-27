@@ -4,69 +4,41 @@
     <div class="row">
         <div class="col text-center">
             <div class="container my-3">
-                <h2>{% if current_user.house %}{{ current_user.house.name }}'s Tasks {% else %}Welcome Home{% endif%}</h2>
+                <h2>{% if current_user.house %}{{ current_user.house.name }} {% else %}Welcome Home{% endif%}</h2>
             </div>
         </div>
     </div>
-    <div class="row p-4 row-cols-1 row-cols-md-2 g-5">
-        
-        {% if current_user.house and current_user.house.rooms %}
-        {% for room in current_user.house.rooms %}
+    {% if current_user.house %}
+    <div class="row">
         <div class="col">
-            <div class="card">
-                <div class="card-header pt-3 text-center">
-                    <h5 class="card-title">{{ room.name }}</h5>
+            <div class="container my-3">
+                <h5>Household Members</h5>
+                <div class="">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Points</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in current_user.house.users %}
+                          <tr>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.points }} </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      Invite roommates with code: <span style="color:#097839; font-weight:600;">{{ current_user.house.code }}</span>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <table class="table">
-                            <tbody>
-                                {% if room.tasks %}
-                                {% for task in room.tasks %}
-                                <tr>
-                                    <th scope="row">{{ task.name }}</th>
-                                    <td>{{ task.points }} points</td>
-
-                                    <td>Due {{ task.due_date.strftime('%b %d') }} </td>
-
-                                    <td>
-
-                                        <a href="{{ url_for('done_task', id=task.id) }}"><button type="button"
-                                                class="btn btn-bahay btn-sm">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon icon-tabler icon-tabler-check" width="14" height="14"
-                                                    viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none"
-                                                    stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M5 12l5 5l10 -10" />
-                                                </svg> Done
-                                            </button></a>
-
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                                {% else %}
-                                <tr>
-
-                                    <td colspan="4">No tasks added to this room yet.</td>
-                                    </a></th>
-                                </tr>
-                                {% endif %}
-                                <tr>
-
-                                    <th colspan="4"><a href="{{ url_for('add_task', id=room.id) }}">
-                                            Add Task
-                                        </a></th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </li>
-                </ul>
             </div>
         </div>
-        {% endfor %}
-        {% endif %}
-        {% if not current_user.house %}
+    </div>
+    {% else %}
+    <div class="row p-4 row-cols-1 row-cols-md-2 g-5">
         <div class="col">
             <a href="{{ url_for('create_house') }}">
                 <div class="card" style="max-height:250px;">
@@ -87,29 +59,7 @@
                 </div>
             </a>
         </div>
-        {% endif %}
     </div>
-    <div class="row py-3 justify-content-center">
-        <div class="col text-center">
-            {% if current_user.house and not current_user.house.rooms %}
-            <p>There are not any rooms added to this house yet! Start by adding a room.</p>
-            {% endif %}
-            {% if current_user.house %}
-            <a href="{{ url_for('add_room') }}">
-                <button class="btn btn-bahay-outline">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-plus" width="25"
-                        height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#009E44" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <rect x="4" y="4" width="16" height="16" rx="2" />
-                        <line x1="9" y1="12" x2="15" y2="12" />
-                        <line x1="12" y1="9" x2="12" y2="15" />
-                    </svg>
-                    Add a Room
-                </button>
-            </a>
-            {% endif %}
-        </div>
-    </div>
+    {% endif %}
 </div>
 {% endblock content%}
