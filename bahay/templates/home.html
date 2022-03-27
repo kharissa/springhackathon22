@@ -13,9 +13,16 @@
                 </div>
                 <div class="row">
                         <div class="col">
-                        <a href="{{ url_for('home') }}">
-                            <button type="button" class="btn btn-bahay ml-4">Join Now</button>
-                        </a>
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('profile') }}">
+                                <button type="button" class="btn btn-bahay ml-4">View House Tasks</button>
+                            </a>
+                            {% else %}
+                            <a href="{{ url_for('register') }}">
+                                <button type="button" class="btn btn-bahay ml-4">Join Now</button>
+                            </a>
+                            {% endif %}
+                        
                     </div>
                 </div>
             </div>

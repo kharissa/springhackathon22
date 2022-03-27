@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="row p-4">
+        <div class="col text-center">
+            <div class="container my-3">
+                <h2>{{ current_user.first_name }}'s Completed Tasks</h2>
+            </div>
+            <table class="table">
+                <tbody>
+                    {% if current_user.history %}
+                    <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Room</th>
+                        <th scope="col">Points</th>
+                        <th scope="col">Date Completed</th>
+
+                    </tr>
+                    {% for task in current_user.history %}
+                    <tr>
+                        <td>{{ task.task.name }}</td>
+                        <td>{{ task.task.room.name }}</td>
+                        <td>{{ task.task.points }} points</td>
+
+                        <td>{{ task.done_at.strftime('%b %d') }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+
+                        <td colspan="4">You haven't completed any tasks yet!</td>
+                        </a></th>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content%}

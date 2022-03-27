@@ -19,8 +19,15 @@
 
 <body>
     <!-- NavBar HTML start -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show alert-fixed" role="alert">
+            {{ message }}
+            <a href="#" class="alert-link" data-dismiss="alert" aria-label="Close">Close Notification</a>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
     <header class="site-header">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-fairview">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-bahay">
             <div class="container-fluid">
                 <a class="navbar-brand px-3" href="/"><img src="/static/img/logo250.png" width="50" height="50"
                         alt=""></a>
@@ -31,20 +38,40 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <ul class="navbar-nav ms-auto mb-lg-0">
+                        {% if current_user.is_authenticated %}
+                        {% if current_user.house %}
+                        <li class="nav-item align-self-center px-2">
+                            {{ current_user.points}} points
+                        </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Account
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                         
+                              <a class="dropdown-item" href="{{ url_for('profile') }}">My Home</a>
+                              <a class="dropdown-item" href="{{ url_for('history') }}">History</a>
+                              <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                            </div>
+                          </li>
+                        {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">
-                                <button type="button" class="btn btn-bahay-outline btn-sm px-3">
+                            <a class="nav-link" href="{{ url_for('login') }}">
+                                <button type="button" class="btn btn-bahay-outline btn-sm px-2">
                                     Login
                                 </button>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">
-                                <button type="button" class="btn btn-bahay btn-sm px-3">
+                            <a class="nav-link" href="{{ url_for('register') }}">
+                                <button type="button" class="btn btn-bahay btn-sm px-2">
                                     Register
                                 </button>
                             </a>
                         </li>
+                        {% endif %}
+                        
                     </ul>
                 </div>
             </div>
@@ -52,14 +79,8 @@
     </header>
     <div class="container-fluid page-container">
         <div id="content-wrap">
-            {% with messages = get_flashed_messages(with_categories=true) %} {% if
-            messages %} {% for category, message in messages %}
-            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <a href="#" class="alert-link" data-dismiss="alert" aria-label="Close">Close Notification</a>
-            </div>
-            {% endfor %} {% endif %} {% endwith %}
-            {% block content %}{% endblock %}
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -6,11 +6,11 @@
 python3
 from bahay import *
 db.create_all()
+flask db init
 ```
 
 ## Run after changes to db
 ```
-flask db init
 flask db migrate -m "initial migration"
 flask db upgrade
 ```
