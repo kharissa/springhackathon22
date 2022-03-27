@@ -4,7 +4,10 @@
     <div class="row">
         <div class="col text-center">
             <div class="container my-3">
-                <h2>{% if current_user.house %}{{ current_user.house.name }} {% else %}Welcome Home{% endif%}</h2>
+                {% if current_user.house %}
+                <h2>{{ current_user.house.name }}</h2> {% else %}<h2> Welcome to Bahay</h2>
+                <p>Start by creating a home on Bahay or joining a home with an invite code.</p>
+                {% endif%}
             </div>
         </div>
     </div>
@@ -16,23 +19,24 @@
                 <div class="">
                     <table class="table table-hover">
                         <thead>
-                          <tr>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Points</th>
-                          </tr>
+                            <tr>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Points</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {% for user in current_user.house.users %}
-                          <tr>
-                            <td>{{ user.first_name }}</td>
-                            <td>{{ user.last_name }}</td>
-                            <td>{{ user.points }} </td>
-                          </tr>
-                          {% endfor %}
+                            {% for user in current_user.house.users %}
+                            <tr>
+                                <td>{{ user.first_name }}</td>
+                                <td>{{ user.last_name }}</td>
+                                <td>{{ user.points }} </td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
-                      </table>
-                      Invite roommates with code: <span style="color:#097839; font-weight:600;">{{ current_user.house.code }}</span>
+                    </table>
+                    Invite roommates with code: <span style="color:#097839; font-weight:600;">{{ current_user.house.code
+                        }}</span>
                 </div>
             </div>
         </div>
@@ -43,7 +47,7 @@
             <a href="{{ url_for('create_house') }}">
                 <div class="card" style="max-height:250px;">
                     <div class="card-header pt-3 text-center">
-                        <h5 class="card-title">Create a House</h5>
+                        <h5 class="card-title">Create a home</h5>
                     </div>
                     <img class="card-img-bottom" src="/static/img/house.png" alt="Card image cap">
                 </div>
@@ -53,7 +57,7 @@
             <a href="{{ url_for('join_house') }}">
                 <div class="card" style="max-height:250px;">
                     <div class="card-header pt-3 text-center">
-                        <h5 class="card-title">Join a House</h5>
+                        <h5 class="card-title">Have an invite code? Join a home</h5>
                     </div>
                     <img class="card-img-bottom" src="/static/img/welcome.jpg" alt="Card image cap">
                 </div>

@@ -9,20 +9,21 @@
                 </div>
                 <div class="row my-4">
                     <p>Bahay is a gamified to-do list for cleaning your home. Create cleaning tasks specific to your
-                        household and win points whenever you complete a task. Compete against your roommates and keep your home clean in the process.</p>
+                        household and win points whenever you complete a task. Compete against your roommates and keep
+                        your home clean in the process.</p>
                 </div>
                 <div class="row">
-                        <div class="col">
-                            {% if current_user.is_authenticated %}
-                            <a href="{{ url_for('profile') }}">
-                                <button type="button" class="btn btn-bahay ml-4">View House Tasks</button>
-                            </a>
-                            {% else %}
-                            <a href="{{ url_for('register') }}">
-                                <button type="button" class="btn btn-bahay ml-4">Join Now</button>
-                            </a>
-                            {% endif %}
-                        
+                    <div class="col">
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('profile') }}">
+                            <button type="button" class="btn btn-bahay ml-4">View House Tasks</button>
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for('register') }}">
+                            <button type="button" class="btn btn-bahay ml-4">Join Now</button>
+                        </a>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

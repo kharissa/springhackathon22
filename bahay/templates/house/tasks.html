@@ -4,7 +4,8 @@
     <div class="row">
         <div class="col text-center">
             <div class="container my-3">
-                <h2>{% if current_user.house %}{{ current_user.house.name }}'s Tasks {% else %}Welcome Home{% endif%}</h2>
+                <h2>{% if current_user.house %}{{ current_user.house.name }}'s Tasks {% else %}Welcome Home{% endif%}
+                </h2>
             </div>
         </div>
     </div>
@@ -30,13 +31,11 @@
                                 {% if room.tasks %}
                                 {% for task in room.tasks %}
                                 <tr>
-                                    <th scope="row">{{ task.name }}</th>
+                                    <th scope="row"><a href="{{ url_for('get_task', id=task.id) }}">{{ task.name }}</a>
+                                    </th>
                                     <td>{{ task.points }} points</td>
-
                                     <td>Due {{ task.due_date.strftime('%b %d') }} </td>
-
                                     <td>
-
                                         <a href="{{ url_for('done_task', id=task.id) }}"><button type="button"
                                                 class="btn btn-bahay btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -47,22 +46,23 @@
                                                     <path d="M5 12l5 5l10 -10" />
                                                 </svg> Done
                                             </button></a>
-
                                     </td>
                                 </tr>
                                 {% endfor %}
                                 {% else %}
                                 <tr>
-
-                                    <td colspan="4">No tasks added to this room yet.</td>
-                                    </a></th>
+                                    <td colspan="4">No tasks added to this room yet. <a href="{{ url_for('add_task', id=room.id) }}">
+                                        Add a task 
+                                    </a>for {{room.name}}.</td>
+                                    </th>
                                 </tr>
                                 {% endif %}
                                 <tr>
-
-                                    <th colspan="4"><a href="{{ url_for('add_task', id=room.id) }}">
+                                    <th colspan="4" class="text-center">
+                                        <a href="{{ url_for('add_task', id=room.id) }}">
                                             Add Task
-                                        </a></th>
+                                        </a>
+                                    </th>
                                 </tr>
                             </tbody>
                         </table>

@@ -28,7 +28,6 @@ class LoginForm(FlaskForm):
 class CreateForm(FlaskForm):
     """ Create a new home form. """
     name = StringField("House Name", validators=[DataRequired()])
-    code = StringField("Join Code", validators=[DataRequired()])
     submit = SubmitField("Create House")
 
 class JoinForm(FlaskForm):

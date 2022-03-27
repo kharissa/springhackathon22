@@ -2,8 +2,10 @@ from bahay import app, db, bcrypt
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from bahay.models import User, House, Room, Task, History
 from bahay.forms import AddRoomForm, AddTaskForm, RegistrationForm, LoginForm, JoinForm, CreateForm
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import login_user, current_user, logout_user
 from datetime import datetime, timedelta
+import string
+import random
 
 @app.route("/")
 def home():
@@ -13,18 +15,19 @@ def home():
 @app.route("/profile")
 def profile():
     """ Render Profile page. """
-    return render_template("account/profile.html")
+    return render_template("account/profile.html", title="My Home")
 
 @app.route("/house-tasks")
 def house_tasks():
     """ Render House Tasks page. """
-    return render_template("house/tasks.html")
+    date = datetime.utcnow()
+    return render_template("house/tasks.html", title="House Tasks", date=date)
 
 
 @app.route("/history")
 def history():
     """ Render History page. """
-    return render_template("account/history.html")
+    return render_template("account/history.html", title="History")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -70,7 +73,12 @@ def create_house():
     """ Render Create a House form. """
     form = CreateForm()
     if form.validate_on_submit():
-        house = House(name=form.name.data, code=form.code.data)
+        code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=7))
+        try:
+            house = House(name=form.name.data, code=code)
+        except:
+            code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+            house = House(name=form.name.data, code=code)
         db.session.add(house)
         current_user.house = house
         db.session.commit()
@@ -104,6 +112,13 @@ def add_room():
     return render_template("house/add-room.html", title="Add a Room", form=form)
 
 @app.route("/task", methods=["GET", "POST"])
+def get_task():
+    """ Get a specific task."""
+    if request.args:
+        task = Task.query.get(request.args['id'])
+        return render_template("house/task.html", title=task.name, task=task)
+
+@app.route("/task/add", methods=["GET", "POST"])
 def add_task():
     """ Render Add a Task form. """
     form = AddTaskForm()
@@ -131,7 +146,7 @@ def done_task():
         # Add points to user
         current_user.points += task.points
         db.session.commit()
-
+        flash(f"Great job! You just scored {task.points} points!", "success")
         return redirect(request.referrer)
 
 @app.route("/history/all", methods=["GET", "POST"])

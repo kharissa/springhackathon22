@@ -23,21 +23,6 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                {{ form.code.label(class="form-control-label") }}
-                                {% if form.code.errors %}
-                                {{ form.code(class="form-control form-control-lg is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.code.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                                {% else %}
-                                {{ form.code(class="form-control form-control-lg") }}
-                                {% endif %}
-                            </div>
-                        </div>
                     </div>
                 </fieldset>
                 <div class="form-group my-3">

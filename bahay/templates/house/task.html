@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="row p-4">
+        <div class="col text-center">
+            <div class="container my-3">
+                <h2>{{ task.name }}</h2>
+                <p>{{task.room.name}} | {{ task.points}} points | {% if task.frequency == 1 %}Daily{% else %}Every
+                    {{task.frequency}} days{% endif %}</p>
+            </div>
+            <table class="table">
+                <tbody>
+                    {% if task.history %}
+                    <tr>
+                        <th scope="col">Household Member</th>
+                        <th scope="col">Points</th>
+                        <th scope="col">Date Completed</th>
+
+                    </tr>
+                    {% for transaction in task.history %}
+                    <tr>
+                        <td>{{ transaction.user.first_name }} {{ transaction.user.last_name }}</td>
+                        <td>{{ transaction.task.points }} points</td>
+                        <td>{{ transaction.done_at.strftime('%b %d') }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No one has completed this task yet!</td>
+                        </a></th>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content%}
